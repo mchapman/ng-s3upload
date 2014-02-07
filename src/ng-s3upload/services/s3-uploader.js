@@ -57,12 +57,16 @@ angular.module('ngS3upload.services', []).
         });
       }
       function uploadComplete(e) {
-        scope.$apply(function () {
-          self.uploads--;
-          scope.uploading = false;
-          scope.success = true;
-          deferred.resolve();
-        });
+        if (xhr.status >= 200 && xhr.status < 300) {
+            scope.$apply(function () {
+              self.uploads--;
+              scope.uploading = false;
+              scope.success = true;
+              deferred.resolve();
+            });
+        } else {
+            uploadFailed(e);
+        }
       }
       function uploadFailed(e) {
         scope.$apply(function () {
