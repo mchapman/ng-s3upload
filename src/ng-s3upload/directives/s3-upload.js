@@ -34,7 +34,7 @@ angular.module('ngS3upload.directives', []).
               uploadingKey: 'uploading',
               folder: ''
             }, opts);
-            var bucket = scope.$eval(attrs.bucket);
+            var bucket = attrs.bucket;  // using a scope.$eval on this was causing problems because something was being cached - didn't have time to investigate
 
             // Bind the button click event
             var button = angular.element(element.children()[0]),
