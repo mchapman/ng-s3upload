@@ -2,12 +2,12 @@
     "name": "ng-s3upload",
     "version": "0.0.1",
     "dependencies": {
-        "angular": "~1.0.7",
-        "angular-sanitize": "~1.0.7"
+        "angular": "*",
+        "angular-sanitize": "*"
     },
     "devDependencies": {
-        "angular-mocks": "~1.0.7",
-        "angular-scenario": "~1.0.7"
+        "angular-mocks": "*",
+        "angular-scenario": "*"
     }
 }
 
