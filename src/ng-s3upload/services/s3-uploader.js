@@ -70,6 +70,7 @@ angular.module('ngS3upload.services', []).
       }
       function uploadFailed(e) {
         scope.$apply(function () {
+          scope.messageText = 'Upload failed with status ' + xhr.status;
           self.uploads--;
           scope.uploading = false;
           scope.success = false;

@@ -98,6 +98,7 @@ angular.module('ngS3upload.services', []).
       }
       function uploadFailed(e) {
         scope.$apply(function () {
+          scope.messageText = 'Upload failed with status ' + xhr.status;
           self.uploads--;
           scope.uploading = false;
           scope.success = false;
@@ -179,13 +180,12 @@ angular.module('ngS3upload.directives', []).
             var uploadFile = function () {
               var selectedFile = file[0].files[0];
               var filename = selectedFile.name;
-              var ext = filename.split('.').pop();
 
               scope.$apply(function () {
                 S3Uploader.getUploadOptions(opts.getOptionsUri).then(function (s3Options) {
                   ngModel.$setValidity('uploading', false);
                   var s3Uri = 'https://' + bucket + '.s3.amazonaws.com/';
-                  var key = opts.folder + (new Date()).getTime() + '-' + S3Uploader.randomString(16) + "." + ext;
+                  var key = opts.folder + S3Uploader.randomString(16) + '-' + (new Date()).getTime() + '-' + filename;
                   S3Uploader.upload(scope,
                       s3Uri,
                       key,
@@ -222,7 +222,7 @@ angular.module('ngS3upload.directives', []).
       },
       template: '<div class="upload-wrap">' +
         '<button class="btn btn-primary" type="button"><span ng-if="!filename">Choose file</span><span ng-if="filename">Replace file</span></button>' +
-        '<a ng-href="{{ filename  }}" target="_blank" class="" ng-if="filename" > Stored file </a>' +
+        '<a ng-href="{{ filename  }}" target="_blank" class="" ng-if="filename" > Stored file </a> <span class="text-error strong">{{messageText}}</span>' +
         '<div class="progress progress-striped" ng-class="{active: uploading}" ng-show="attempt" style="margin-top: 10px">' +
         '<div class="bar" style="width: {{ progress }}%;" ng-class="barClass()"></div>' +
         '</div>' +
