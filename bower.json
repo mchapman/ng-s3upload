@@ -8,6 +8,7 @@
     "devDependencies": {
         "angular-mocks": "*",
         "angular-scenario": "*"
-    }
+    },
+    "main": "build/ng-s3upload.js"
 }
 
