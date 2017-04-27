@@ -5,10 +5,10 @@ angular.module('ngS3upload.services', []).
 
     this.getUploadOptions = function (uri) {
       var deferred = $q.defer();
-      $http.get(uri).
-        success(function (response, status) {
+      $http.get(uri)
+        .then(function (response, status) {
           deferred.resolve(response);
-        }).error(function (error, status) {
+        }, function (error, status) {
           deferred.reject(error);
         });
 
